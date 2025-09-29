@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from vnstock3 import Vnstock
+from vnstock import Quote
 import plotly.graph_objects as go
 
 st.title("📊 Quant Trading Demo - VNStock3")
@@ -9,10 +9,9 @@ st.title("📊 Quant Trading Demo - VNStock3")
 symbol = st.text_input("Nhập mã cổ phiếu (VD: VNM, FPT, SSI):", "VNM")
 
 # Lấy dữ liệu từ VNStock3
-vn = Vnstock()
-stock = vn.stock(symbol, "HOSE")
+quote = Quote(symbol=symbol, source='VCI')
 
-df = stock.quote.history(
+df = quote.history(
     start="2024-01-01", 
     end="2024-12-31", 
     interval="1D"
